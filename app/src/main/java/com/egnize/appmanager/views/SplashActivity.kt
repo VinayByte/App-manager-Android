@@ -13,6 +13,7 @@ import com.egnize.appmanager.DataRepository
 import com.egnize.appmanager.R
 import com.egnize.appmanager.databinding.ActivitySplashBinding
 import com.egnize.appmanager.services.LoadApps
+import com.egnize.appmanager.utils.Utils
 import com.egnize.appmanager.viewmodels.BaseViewModel
 import com.egnize.appmanager.viewmodels.MainViewModel
 import java.util.ArrayList
@@ -25,9 +26,6 @@ class SplashActivity : BaseActivity() {
          get() = R.layout.activity_splash
 
     override fun setBottomAppBar() {}
-    override val viewModel: MainViewModel?
-        get() = TODO("Not yet implemented")
-
 
     override fun setBinding() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
@@ -40,32 +38,34 @@ class SplashActivity : BaseActivity() {
 //            return dataRepository!!.loadApps
 //        }
 
-//    override val viewModel: MainViewModel
-//        get() {
-//            if (mainViewModel == null) {
-//                val application = application
-//                val dataRepository = (application as App).dataRepository
-//                val rootManager = dataRepository!!.rootManager
-//                val factory =
-//                    MainViewModel.Factory(application, rootManager)
-//                mainViewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
-//            }
-//            return mainViewModel!!
-//        }
+    override val viewModel: MainViewModel
+        get() {
+            if (mainViewModel == null) {
+                val application = application
+                val dataRepository = (application as App).dataRepository
+                val rootManager = dataRepository!!.rootManager
+                val factory =
+                    MainViewModel.Factory(application, rootManager)
+                mainViewModel = ViewModelProviders.of(this, factory).get(MainViewModel::class.java)
+            }
+            return mainViewModel!!
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getLoadApps()!!.searchInstalledApps()
-//        viewModel.firestoreDataFetched.observe(this, Observer {
-//            if (it) {
-//
-//            }
-//        })
+        viewModel.firestoreDataFetched.observe(this, Observer {
+            if (it) {
 
+            }
+        })
+
+//        Utils.readJson(this)
         binding.btnNext.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
+
     }
 
     private fun getLoadApps(): LoadApps? {

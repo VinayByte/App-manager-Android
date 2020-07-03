@@ -1,43 +1,33 @@
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2019 Nicola Serlonghi <nicolaserlonghi@gmail.com>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 package com.egnize.appmanager.services
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.egnize.appmanager.AppExecutors
 import com.egnize.appmanager.Constants
 import com.egnize.appmanager.models.App
+import com.egnize.chineseapps.utils.Logs
+import com.egnize.chineseapps.utils.Response
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.FirebasePerformance
 import java.util.*
 
-class LoadApps(private val context: Context, private val appExecutors: AppExecutors) {
+class LoadApps(private val context: Context, private val appExecutors: AppExecutors, private val db: FirebaseFirestore) {
     val installedApps = MutableLiveData<MutableList<App>>()
     private var installedAppList: MutableList<App> = ArrayList()
     private var packageManager: PackageManager? = null
+    val firestoreDataFetched = MutableLiveData<Boolean>()
+    val chineseAppsList :MutableList<Response> = mutableListOf()
+    val firestoreChineseApps = MutableLiveData<MutableList<Response>>()
+
+    val installedChineseApps = MutableLiveData<MutableList<App>>()
+    private var installedChineseAppList: List<App> = ArrayList()
+
     fun searchInstalledApps() {
         appExecutors.diskIO().execute {
 
@@ -48,6 +38,7 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
             val installedApplicationsInfo = getInstalledApplication(context)
             appDetails(installedApplicationsInfo)
             updateInstalledApps()
+            getFireStoreData()
             searchAppsTrace.stop()
         }
     }
@@ -132,6 +123,40 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
 
     private fun updateInstalledApps() {
         installedApps.postValue(installedAppList)
+    }
+
+    fun getFireStoreData(){
+        val docRef = db.collection("data").document("app_list")
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w("@", "Listen failed.", e)
+                firestoreDataFetched.postValue(false)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null && snapshot.exists()) {
+                chineseAppsList.clear()
+                for (item in snapshot.data?.getValue("list") as ArrayList<HashMap<String, String>>){
+                    chineseAppsList.add(Response(item["name"], item["pkg"]))
+                }
+                Logs.d("Firestore: ", "Current data: ${snapshot.data}")
+                filteredChineseApps()
+                firestoreChineseApps.postValue(chineseAppsList)
+                firestoreDataFetched.postValue(true)
+            } else {
+                Log.d("Firestore: ", "Current data: null")
+                firestoreDataFetched.postValue(false)
+
+            }
+        }
+    }
+
+    private fun filteredChineseApps() {
+        if (chineseAppsList.isNotEmpty()){
+            val aColIds = chineseAppsList.map { it.pkg }.toSet()
+            installedChineseAppList = installedAppList.filter {it.packageName in aColIds  }
+            installedChineseApps.postValue(installedChineseAppList as MutableList<App>)
+        }
     }
 
 }

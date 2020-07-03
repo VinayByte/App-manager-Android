@@ -1,48 +1,27 @@
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2019 Nicola Serlonghi <nicolaserlonghi@gmail.com>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, SUBJECT to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 package com.egnize.appmanager
 
 import android.content.Context
 import com.egnize.appmanager.services.LoadApps
 import com.egnize.appmanager.services.RootManager
+import com.google.firebase.firestore.FirebaseFirestore
 
-class DataRepository private constructor(context: Context, appExecutors: AppExecutors) {
+class DataRepository private constructor(context: Context, appExecutors: AppExecutors, db: FirebaseFirestore) {
     val loadApps: LoadApps
     val rootManager: RootManager
 
+
     companion object {
         private var dataRepository: DataRepository? = null
-        fun getDataRepository(context: Context, appExecutors: AppExecutors): DataRepository? {
+        fun getDataRepository(context: Context, appExecutors: AppExecutors, db: FirebaseFirestore): DataRepository? {
             if (dataRepository == null) {
-                synchronized(DataRepository::class.java) { if (dataRepository == null) dataRepository = DataRepository(context, appExecutors) }
+                synchronized(DataRepository::class.java) { if (dataRepository == null) dataRepository = DataRepository(context, appExecutors, db) }
             }
             return dataRepository
         }
     }
 
     init {
-        loadApps = LoadApps(context, appExecutors)
+        loadApps = LoadApps(context, appExecutors, db)
         rootManager = RootManager(appExecutors)
     }
 }

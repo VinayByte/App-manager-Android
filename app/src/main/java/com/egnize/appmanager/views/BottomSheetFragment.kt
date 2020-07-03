@@ -1,26 +1,3 @@
-/*
- * The MIT License (MIT)
- *
- * Copyright (c) 2019 Nicola Serlonghi <nicolaserlonghi@gmail.com>
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, SUBJECT to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
 package com.egnize.appmanager.views
 
 import android.annotation.SuppressLint
@@ -50,11 +27,12 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
     interface IsSelectedBottomSheetFragment {
         fun onSelectedAlphabeticalOrder()
         fun onSelectInstallationDateOrder()
-        fun onSelectedHideSystemApps()
-        fun onSelectedHideUserApps()
+//        fun onSelectedHideSystemApps()
+//        fun onSelectedHideUserApps()
         fun onSelectedShowAllApps()
         fun onSelectedShowSystemApps()
         fun onSelectedShowUserApps()
+        fun onSelectedShowChineseApps()
     }
 
     override fun onAttach(context: Context) {
@@ -103,6 +81,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
         val storedStatusAllApps = Prefs.getBoolean(Constants.FLAG_ALL_APPS, true)
         val storedStatusShowSystemApps = Prefs.getBoolean(Constants.FLAG_SYSTEM_APPS, false)
         val storedStatusShowUserApps = Prefs.getBoolean(Constants.FLAG_USER_APPS, false)
+        val storedStatusShowChineseApps = Prefs.getBoolean(Constants.FLAG_CHINESE_APPS, false)
         //        boolean storedStatusHideSystemApps = Prefs.getBoolean(Constants.FLAG_HIDE_SYSTEM_APPS, false);
 //        boolean storedStatusHideUserApps = Prefs.getBoolean(Constants.FLAG_HIDE_USER_APPS, false);
         setStateStoredOfcheckedAlphabeticalOrder(storedStatusAlphabeticalOrder)
@@ -112,73 +91,79 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
         setStateStoredOfShowAllApps(storedStatusAllApps)
         setStateStoredOfShowSystemApps(storedStatusShowSystemApps)
         setStateStoredOfShowUserApps(storedStatusShowUserApps)
+        setStateStoredOfShowChineseApps(storedStatusShowChineseApps)
+
     }
 
     private fun setStateStoredOfcheckedAlphabeticalOrder(status: Boolean) {
-        if (status) binding!!.checkedAlphabeticalOrder.visibility = View.VISIBLE else binding!!.checkedAlphabeticalOrder.visibility = View.GONE
+        if (status) binding.checkedAlphabeticalOrder.visibility = View.VISIBLE else binding.checkedAlphabeticalOrder.visibility = View.GONE
     }
 
     private fun setStateStoredOfcheckedInstallationDate(status: Boolean) {
-        if (status) binding!!.checkedInstallationDate.visibility = View.VISIBLE else binding!!.checkedInstallationDate.visibility = View.GONE
+        if (status) binding.checkedInstallationDate.visibility = View.VISIBLE else binding.checkedInstallationDate.visibility = View.GONE
     }
 
     private fun setStateStoredOfHideSystemApps(status: Boolean) {
-        if (status) binding!!.checkedSystemApps.visibility = View.VISIBLE else binding!!.checkedSystemApps.visibility = View.GONE
+        if (status) binding.checkedSystemApps.visibility = View.VISIBLE else binding.checkedSystemApps.visibility = View.GONE
     }
 
     private fun setStateStoredOfShowSystemApps(status: Boolean) {
-        if (status) binding!!.checkedSystemApps.visibility = View.VISIBLE else binding!!.checkedSystemApps.visibility = View.GONE
+        if (status) binding.checkedSystemApps.visibility = View.VISIBLE else binding.checkedSystemApps.visibility = View.GONE
     }
 
     private fun setStateStoredOfHideUserApps(status: Boolean) {
-        if (status) binding!!.checkedUserApps.visibility = View.VISIBLE else binding!!.checkedUserApps.visibility = View.GONE
+        if (status) binding.checkedUserApps.visibility = View.VISIBLE else binding.checkedUserApps.visibility = View.GONE
     }
 
     private fun setStateStoredOfShowUserApps(status: Boolean) {
-        if (status) binding!!.checkedUserApps.visibility = View.VISIBLE else binding!!.checkedUserApps.visibility = View.GONE
+        if (status) binding.checkedUserApps.visibility = View.VISIBLE else binding.checkedUserApps.visibility = View.GONE
+    }
+    private fun setStateStoredOfShowChineseApps(status: Boolean) {
+        if (status) binding.checkedChineseApps.visibility = View.VISIBLE else binding.checkedChineseApps.visibility = View.GONE
     }
 
     private fun setStateStoredOfShowAllApps(status: Boolean) {
-        if (status) binding!!.checkedAllApps.visibility = View.VISIBLE else binding!!.checkedAllApps.visibility = View.GONE
+        if (status) binding.checkedAllApps.visibility = View.VISIBLE else binding.checkedAllApps.visibility = View.GONE
     }
 
     private fun setSavedAppTheme() {
         val index = indexOfSavingNightMode
         val appThemeOptions = resources.getStringArray(R.array.alert_dialog_app_theme_options)
-        binding!!.subtitleAppTheme.text = appThemeOptions[index]
+        binding.subtitleAppTheme.text = appThemeOptions[index]
     }
 
     private fun setOnclickListener() {
-        binding!!.alphabeticalOrder.setOnClickListener(this)
-        binding!!.installationDate.setOnClickListener(this)
-        binding!!.systemApps.setOnClickListener(this)
-        binding!!.userApps.setOnClickListener(this)
-        binding!!.chooseAppTheme.setOnClickListener(this)
-        binding!!.allApps.setOnClickListener(this)
+        binding.alphabeticalOrder.setOnClickListener(this)
+        binding.installationDate.setOnClickListener(this)
+        binding.systemApps.setOnClickListener(this)
+        binding.userApps.setOnClickListener(this)
+        binding.chooseAppTheme.setOnClickListener(this)
+        binding.allApps.setOnClickListener(this)
+        binding.chineseApps.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         when (view.id) {
             R.id.alphabetical_order -> {
-                manageClickAppOrder(binding!!.checkedAlphabeticalOrder, binding!!.checkedInstallationDate)
+                manageClickAppOrder(binding.checkedAlphabeticalOrder, binding.checkedInstallationDate)
                 storedAlphabeticalOrderClicked()
                 isSelectedBottomSheetFragment!!.onSelectedAlphabeticalOrder()
                 dismiss()
             }
             R.id.installation_date -> {
-                manageClickAppOrder(binding!!.checkedInstallationDate, binding!!.checkedAlphabeticalOrder)
+                manageClickAppOrder(binding.checkedInstallationDate, binding.checkedAlphabeticalOrder)
                 storedInstallationDateClicked()
                 isSelectedBottomSheetFragment!!.onSelectInstallationDateOrder()
                 dismiss()
             }
             R.id.system_apps -> {
-                manageClickAppOrder(binding!!.checkedSystemApps, binding!!.checkedUserApps, binding!!.checkedAllApps)
+                manageClickAppOrder(binding.checkedSystemApps, binding.checkedUserApps, binding.checkedAllApps, binding.checkedChineseApps)
                 //                hideSystemAppsClicked();
                 showSystemAppsClicked()
                 dismiss()
             }
             R.id.user_apps -> {
-                manageClickAppOrder(binding!!.checkedUserApps, binding!!.checkedSystemApps, binding!!.checkedAllApps)
+                manageClickAppOrder(binding.checkedUserApps, binding.checkedSystemApps, binding.checkedAllApps, binding.checkedChineseApps)
                 //                hideUserAppsClicked();
                 showUserAppsClicked()
                 dismiss()
@@ -188,8 +173,13 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
                 dismiss()
             }
             R.id.all_apps -> {
-                manageClickAppOrder(binding!!.checkedAllApps, binding!!.checkedSystemApps, binding!!.checkedUserApps)
+                manageClickAppOrder(binding.checkedAllApps, binding.checkedSystemApps, binding.checkedUserApps, binding.checkedChineseApps)
                 showAllAppsClicked()
+                dismiss()
+            }
+            R.id.chinese_apps -> {
+                manageClickAppOrder(binding.checkedChineseApps, binding.checkedSystemApps, binding.checkedUserApps, binding.checkedAllApps)
+                showChineseAppsClicked()
                 dismiss()
             }
         }
@@ -201,11 +191,12 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
         alreadyClicked.visibility = View.GONE
     }
 
-    private fun manageClickAppOrder(clicked: ImageView, alreadyClicked: ImageView, alreadyClicked1: ImageView) {
+    private fun manageClickAppOrder(clicked: ImageView, alreadyClicked: ImageView, alreadyClicked1: ImageView, alreadyClicked2: ImageView) {
         if (clicked.visibility == View.VISIBLE) return
         clicked.visibility = View.VISIBLE
         alreadyClicked.visibility = View.GONE
         alreadyClicked1.visibility = View.GONE
+        alreadyClicked2.visibility = View.GONE
     }
 
     private fun storedAlphabeticalOrderClicked() {
@@ -218,43 +209,44 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
         Prefs.putBoolean(Constants.FLAG_INSTALLATION_DATE, true)
     }
 
-    private fun hideSystemAppsClicked() {
-        val systemApps = binding!!.checkedSystemApps
-        val userApps = binding!!.checkedUserApps
-        if (systemApps.visibility == View.VISIBLE) {
-            systemApps.visibility = View.GONE
-            Prefs.putBoolean(Constants.FLAG_HIDE_SYSTEM_APPS, false)
-            isSelectedBottomSheetFragment!!.onSelectedShowAllApps()
-        } else {
-            systemApps.visibility = View.VISIBLE
-            userApps.visibility = View.GONE
-            Prefs.putBoolean(Constants.FLAG_HIDE_SYSTEM_APPS, true)
-            Prefs.putBoolean(Constants.FLAG_HIDE_USER_APPS, false)
-            isSelectedBottomSheetFragment!!.onSelectedHideSystemApps()
-        }
-    }
+//    private fun hideSystemAppsClicked() {
+//        val systemApps = binding.checkedSystemApps
+//        val userApps = binding.checkedUserApps
+//        if (systemApps.visibility == View.VISIBLE) {
+//            systemApps.visibility = View.GONE
+//            Prefs.putBoolean(Constants.FLAG_HIDE_SYSTEM_APPS, false)
+//            isSelectedBottomSheetFragment!!.onSelectedShowAllApps()
+//        } else {
+//            systemApps.visibility = View.VISIBLE
+//            userApps.visibility = View.GONE
+//            Prefs.putBoolean(Constants.FLAG_HIDE_SYSTEM_APPS, true)
+//            Prefs.putBoolean(Constants.FLAG_HIDE_USER_APPS, false)
+//            isSelectedBottomSheetFragment!!.onSelectedHideSystemApps()
+//        }
+//    }
 
-    private fun hideUserAppsClicked() {
-        val systemApps = binding!!.checkedSystemApps
-        val userApps = binding!!.checkedUserApps
-        if (userApps.visibility == View.VISIBLE) {
-            userApps.visibility = View.GONE
-            Prefs.putBoolean(Constants.FLAG_HIDE_USER_APPS, false)
-            isSelectedBottomSheetFragment!!.onSelectedShowAllApps()
-        } else {
-            userApps.visibility = View.VISIBLE
-            systemApps.visibility = View.GONE
-            Prefs.putBoolean(Constants.FLAG_HIDE_USER_APPS, true)
-            Prefs.putBoolean(Constants.FLAG_HIDE_SYSTEM_APPS, false)
-            Prefs.putBoolean(Constants.FLAG_ALL_APPS, false)
-            isSelectedBottomSheetFragment!!.onSelectedHideUserApps()
-        }
-    }
+//    private fun hideUserAppsClicked() {
+//        val systemApps = binding.checkedSystemApps
+//        val userApps = binding.checkedUserApps
+//        if (userApps.visibility == View.VISIBLE) {
+//            userApps.visibility = View.GONE
+//            Prefs.putBoolean(Constants.FLAG_HIDE_USER_APPS, false)
+//            isSelectedBottomSheetFragment!!.onSelectedShowAllApps()
+//        } else {
+//            userApps.visibility = View.VISIBLE
+//            systemApps.visibility = View.GONE
+//            Prefs.putBoolean(Constants.FLAG_HIDE_USER_APPS, true)
+//            Prefs.putBoolean(Constants.FLAG_HIDE_SYSTEM_APPS, false)
+//            Prefs.putBoolean(Constants.FLAG_ALL_APPS, false)
+//            isSelectedBottomSheetFragment!!.onSelectedHideUserApps()
+//        }
+//    }
 
     private fun showAllAppsClicked() {
         Prefs.putBoolean(Constants.FLAG_ALL_APPS, true)
         Prefs.putBoolean(Constants.FLAG_SYSTEM_APPS, false)
         Prefs.putBoolean(Constants.FLAG_USER_APPS, false)
+        Prefs.putBoolean(Constants.FLAG_CHINESE_APPS, false)
         isSelectedBottomSheetFragment!!.onSelectedShowAllApps()
     }
 
@@ -262,6 +254,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
         Prefs.putBoolean(Constants.FLAG_ALL_APPS, false)
         Prefs.putBoolean(Constants.FLAG_SYSTEM_APPS, true)
         Prefs.putBoolean(Constants.FLAG_USER_APPS, false)
+        Prefs.putBoolean(Constants.FLAG_CHINESE_APPS, false)
         isSelectedBottomSheetFragment!!.onSelectedShowSystemApps()
     }
 
@@ -269,9 +262,17 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
         Prefs.putBoolean(Constants.FLAG_ALL_APPS, false)
         Prefs.putBoolean(Constants.FLAG_SYSTEM_APPS, false)
         Prefs.putBoolean(Constants.FLAG_USER_APPS, true)
+        Prefs.putBoolean(Constants.FLAG_CHINESE_APPS, false)
         isSelectedBottomSheetFragment!!.onSelectedShowUserApps()
     }
 
+    private fun showChineseAppsClicked() {
+        Prefs.putBoolean(Constants.FLAG_CHINESE_APPS, true)
+        Prefs.putBoolean(Constants.FLAG_ALL_APPS, false)
+        Prefs.putBoolean(Constants.FLAG_SYSTEM_APPS, false)
+        Prefs.putBoolean(Constants.FLAG_USER_APPS, false)
+        isSelectedBottomSheetFragment!!.onSelectedShowChineseApps()
+    }
     private fun manageClickChooseAppTheme() {
         val title = resources.getString(R.string.alert_dialog_app_theme_title)
         val appThemeOptions = resources.getStringArray(R.array.alert_dialog_app_theme_options)

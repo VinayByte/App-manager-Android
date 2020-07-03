@@ -230,17 +230,17 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
         setOnRefreshListener()
         startLoadingAnimation()
 
-        viewModel.installedApps.observe(this, Observer {
-            if (!it.isNullOrEmpty()) {
-                installedApps = it
-                hideAppStoredFlag()
-                orderAppInStoredOrder()
-                updateRecyclerView()
-                stopLoadingAnimation()
-                binding.swipeRefresh.isRefreshing = false
-            }
-        })
-        checkRootState()
+//        viewModel.installedApps.observe(this, Observer {
+//            if (!it.isNullOrEmpty()) {
+//                installedApps = it
+//                hideAppStoredFlag()
+//                orderAppInStoredOrder()
+//                updateRecyclerView()
+//                stopLoadingAnimation()
+//                binding.swipeRefresh.isRefreshing = false
+//            }
+//        })
+//        checkRootState()
     }
 
     private fun setOnclickListener() {
@@ -255,17 +255,17 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
 
     override fun onResume() {
         super.onResume()
-//        viewModel.installedApps.observe(this, Observer {
-//            if (!it.isNullOrEmpty()) {
-//                installedApps = it
-//                hideAppStoredFlag()
-//                orderAppInStoredOrder()
-//                updateRecyclerView()
-//                stopLoadingAnimation()
-//                binding.swipeRefresh.isRefreshing = false
-//            }
-//        })
-//        checkRootState()
+        viewModel.installedApps.observe(this, Observer {
+            if (!it.isNullOrEmpty()) {
+                installedApps = it
+                hideAppStoredFlag()
+                orderAppInStoredOrder()
+                updateRecyclerView()
+                stopLoadingAnimation()
+                binding.swipeRefresh.isRefreshing = false
+            }
+        })
+        checkRootState()
     }
 
     private fun hideAppStoredFlag() {
@@ -274,17 +274,21 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
         val isShowSystemApps = Prefs.getBoolean(Constants.FLAG_SYSTEM_APPS, false)
         val isShowUserApps = Prefs.getBoolean(Constants.FLAG_USER_APPS, false)
         val isShowAllApps = Prefs.getBoolean(Constants.FLAG_ALL_APPS, true)
+        val isShowChineseApps = Prefs.getBoolean(Constants.FLAG_CHINESE_APPS, false)
+
         //        if(isHideSystemApps && !isHideUserApps) {
 //            this.installedApps = (ArrayList<App>?) getViewModel().hideSystemApps(installedApps);
 //        } else if(isHideUserApps && !isHideSystemApps) {
 //            this.installedApps = (ArrayList<App>?) getViewModel().hideUserApps(installedApps);
 //        }
-        if (!isShowSystemApps && !isShowUserApps && isShowAllApps) {
+        if (!isShowSystemApps && !isShowUserApps && isShowAllApps && !isShowChineseApps) {
             installedApps = viewModel.showAllApps(installedApps)
-        } else if (isShowSystemApps && !isShowUserApps && !isShowAllApps) {
+        } else if (isShowSystemApps && !isShowUserApps && !isShowAllApps && !isShowChineseApps) {
             installedApps = viewModel.hideUserApps(installedApps)
-        } else if (!isShowSystemApps && isShowUserApps && !isShowAllApps) {
+        } else if (!isShowSystemApps && isShowUserApps && !isShowAllApps && !isShowChineseApps) {
             installedApps = viewModel.hideSystemApps(installedApps)
+        }else if (!isShowSystemApps && !isShowUserApps && !isShowAllApps && isShowChineseApps) {
+            installedApps = viewModel.showChineseApps(installedApps)
         }
     }
 
@@ -407,33 +411,42 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
         updateRecyclerView()
     }
 
-    override fun onSelectedHideSystemApps() {
-        installedApps = viewModel.uncheckedAllApps(installedApps)
-        installedApps = viewModel.hideSystemApps(installedApps)
-        updateRecyclerView()
-    }
-
-    override fun onSelectedHideUserApps() {
-        installedApps = viewModel.uncheckedAllApps(installedApps)
-        installedApps = viewModel.hideUserApps(installedApps)
-        updateRecyclerView()
-    }
+//    override fun onSelectedHideSystemApps() {
+//        installedApps = viewModel.uncheckedAllApps(installedApps)
+//        installedApps = viewModel.hideSystemApps(installedApps)
+//        updateRecyclerView()
+//    }
+//
+//    override fun onSelectedHideUserApps() {
+//        installedApps = viewModel.uncheckedAllApps(installedApps)
+//        installedApps = viewModel.hideUserApps(installedApps)
+//        updateRecyclerView()
+//    }
 
     override fun onSelectedShowAllApps() {
+        onRefresh()
         installedApps = viewModel.uncheckedAllApps(installedApps)
         installedApps = viewModel.showAllApps(installedApps)
         updateRecyclerView()
     }
 
     override fun onSelectedShowSystemApps() {
+        onRefresh()
         installedApps = viewModel.uncheckedAllApps(installedApps)
         installedApps = viewModel.hideUserApps(installedApps)
         updateRecyclerView()
     }
 
     override fun onSelectedShowUserApps() {
+        onRefresh()
         installedApps = viewModel.uncheckedAllApps(installedApps)
         installedApps = viewModel.hideSystemApps(installedApps)
+        updateRecyclerView()
+    }
+    override fun onSelectedShowChineseApps() {
+        onRefresh()
+        installedApps = viewModel.uncheckedAllApps(installedApps)
+        installedApps = viewModel.showChineseApps(installedApps)
         updateRecyclerView()
     }
 

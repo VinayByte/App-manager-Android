@@ -26,11 +26,13 @@ class App : Application() {
                 .setPrefsName(BuildConfig.APPLICATION_ID)
                 .setUseDefaultSharedPreference(true)
                 .build()
+        db = Firebase.firestore
+
         setSavedNightMode()
     }
 
     val dataRepository: DataRepository?
-        get() = DataRepository.getDataRepository(applicationContext, appExecutors)
+        get() = DataRepository.getDataRepository(applicationContext, appExecutors, db)
 
     private fun setSavedNightMode() {
         val modeSave = Prefs.getInt(Constants.NIGHT_MODE, AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
