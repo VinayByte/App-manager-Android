@@ -1,0 +1,518 @@
+[
+    {
+        "name": "Helo",
+        "pkg": "app.buzz.share"
+    },
+    {
+        "name": "Helo Lite",
+        "pkg": "app.buzz.share.lite"
+    },
+    {
+        "name": "SHAREit",
+        "pkg": "com.lenovo.anyshare.gps"
+    },
+    {
+        "name": "SHAREit Lite",
+        "pkg": "shareit.lite"
+    },
+    {
+        "name": "WATCHit",
+        "pkg": "com.ushareit.watchit"
+    },
+    {
+        "name": "TikTok",
+        "pkg": "com.zhiliaoapp.musically"
+    },
+    {
+        "name": "TikTok Wall Picture",
+        "pkg": "com.zhiliao.musically.livewallpaper"
+    },
+    {
+        "name": "TikTok Lite",
+        "pkg": "com.ss.android.ugc.trill.go"
+    },
+    {
+        "name": "Kwai",
+        "pkg": "com.kwai.video"
+    },
+    {
+        "name": "UCBrowser",
+        "pkg": "com.UCMobile.intl"
+    },
+    {
+        "name": "UCBrowser Mini",
+        "pkg": "com.uc.browser.en"
+    },
+    {
+        "name": "UC Browser Turbo",
+        "pkg": "com.ucturbo"
+    },
+    {
+        "name": "UC Cricket",
+        "pkg": "com.CricChat.intl"
+    },
+    {
+        "name": "LiveMe",
+        "pkg": "com.live.royal"
+    },
+    {
+        "name": "Bigo Live",
+        "pkg": "sg.bigo.live"
+    },
+    {
+        "name": "Vigo Video",
+        "pkg": "com.ss.android.ugc.boom"
+    },
+    {
+        "name": "Vigo Video Live Photo",
+        "pkg": "com.ss.android.ugc.boom.livewallpaper"
+    },
+    {
+        "name": "AirBrush: Easy Photo Editor",
+        "pkg": "com.magicv.airbrush"
+    },
+    {
+        "name": "BeautyPlus",
+        "pkg": "com.commsource.beautyplus"
+    },
+    {
+        "name": "MakeupPlus",
+        "pkg": "com.meitu.makeup"
+    },
+    {
+        "name": "Meitu ",
+        "pkg": "com.mt.mtxx.mtxx"
+    },
+    {
+        "name": "BeautyCam",
+        "pkg": "com.meitu.meiyancamera"
+    },
+    {
+        "name": "O2Cam",
+        "pkg": "com.meitu.oxygen"
+    },
+    {
+        "name": "AirVid Video Filters & Frames",
+        "pkg": "com.meitu.airvid"
+    },
+    {
+        "name": "PlusMe Camera",
+        "pkg": "com.meitu.beautyplusme"
+    },
+    {
+        "name": "Meipai",
+        "pkg": "com.meitu.meipaimv"
+    },
+    {
+        "name": "Pomelo ",
+        "pkg": "com.beautyplus.pomelo.filters.photo"
+    },
+    {
+        "name": "SelfieCity",
+        "pkg": "com.meitu.wheecam"
+    },
+    {
+        "name": "AirBrush 2Go",
+        "pkg": "com.meitu.airbrush.vivo"
+    },
+    {
+        "name": "BOXxCAM",
+        "pkg": "com.meitu.boxxcam"
+    },
+    {
+        "name": "Xender",
+        "pkg": "cn.xender"
+    },
+    {
+        "name": "Cam Scanner",
+        "pkg": "com.intsig.camscanner"
+    },
+    {
+        "name": "CamCard Free",
+        "pkg": "com.intsig.BCRLite"
+    },
+    {
+        "name": "Ludo World",
+        "pkg": "com.tencent.ludosuperstar"
+    },
+    {
+        "name": "Arena of Valor",
+        "pkg": "com.ngame.allstar.eu"
+    },
+    {
+        "name": "Chess Rush",
+        "pkg": "com.tencent.godgame"
+    },
+    {
+        "name": "Clash of Kings",
+        "pkg": "com.hcg.cok.gp"
+    },
+    {
+        "name": "Clash of Kings:The West",
+        "pkg": "com.hcg.ctw.gp"
+    },
+    {
+        "name": "Clash of Queens",
+        "pkg": "com.elex.coq.gp"
+    },
+    {
+        "name": "Zombie World SLG 3D",
+        "pkg": "com.zw.zombieworld.gp"
+    },
+    {
+        "name": "Heroes War",
+        "pkg": "com.hcg.tos.gp"
+    },
+    {
+        "name": "Mobile Legends",
+        "pkg": "com.mobile.legends"
+    },
+    {
+        "name": "ClubFactory",
+        "pkg": "club.fromfactory"
+    },
+    {
+        "name": "Shein",
+        "pkg": "com.zzkko"
+    },
+    {
+        "name": "Romwe",
+        "pkg": "com.romwe"
+    },
+    {
+        "name": "AppLock",
+        "pkg": "com.domobile.applockwatcher"
+    },
+    {
+        "name": "VMate",
+        "pkg": "com.uc.vmate"
+    },
+    {
+        "name": "Game of Sultans",
+        "pkg": "com.dc.hwsj"
+    },
+    {
+        "name": "Mafia City",
+        "pkg": "com.yottagames.mafiawar"
+    },
+    {
+        "name": "Wechat",
+        "pkg": "com.tencent.mm"
+    },
+    {
+        "name": "QQ",
+        "pkg": "com.tencent.mobileqq"
+    },
+    {
+        "name": "Baidu",
+        "pkg": "com.baidu.searchbox"
+    },
+    {
+        "name": "360 Mobile Guard",
+        "pkg": "com.security.antivirus.sefeanti"
+    },
+    {
+        "name": "Taobao",
+        "pkg": "com.taobao.taobao"
+    },
+    {
+        "name": "Sina Weibo",
+        "pkg": "com.sina.weibo"
+    },
+    {
+        "name": "Weibo",
+        "pkg": "com.weico.international"
+    },
+    {
+        "name": "UC News",
+        "pkg": "com.uc.iflow"
+    },
+    {
+        "name": "NewsDog",
+        "pkg": "com.newsdog"
+    },
+    {
+        "name": "VivaVideo- QU Video Inc",
+        "pkg": "com.quvideo.vivavideo.lite"
+    },
+    {
+        "name": "Parallel Space",
+        "pkg": "com.lbe.parallel.intl"
+    },
+    {
+        "name": "APUS Browser",
+        "pkg": "com.apusapps.browser"
+    },
+    {
+        "name": "Perfect Corp",
+        "pkg": "com.cyberlink.youperfect"
+    },
+    {
+        "name": "Virus Cleaner (Hi Security Lab)",
+        "pkg": "com.HIsecurity.antivirus.litepro"
+    },
+    {
+        "name": "CM Browser",
+        "pkg": "com.cm.browser.downloader.adblock"
+    },
+    {
+        "name": "Mi Community",
+        "pkg": "com.mi.global.bbs"
+    },
+    {
+        "name": "Vault-Hide",
+        "pkg": "com.netqin.ps"
+    },
+    {
+        "name": "YouCam Makeup",
+        "pkg": "com.cyberlink.youcammakeup"
+    },
+    {
+        "name": "Mi Store",
+        "pkg": "com.mi.global.shop"
+    },
+    {
+        "name": "DU Battery Saver",
+        "pkg": "com.limsky.ramcleaner"
+    },
+    {
+        "name": "DU Cleaner",
+        "pkg": "com.DU.Cleaner.antivirus.cleanphone"
+    },
+    {
+        "name": "Baidu Map",
+        "pkg": "com.baidu.BaiduMap"
+    },
+    {
+        "name": "Photo Wonder",
+        "pkg": "com.yubitu.android.YubiCollage"
+    },
+    {
+        "name": "QQ Music",
+        "pkg": "com.tencent.qqmusic"
+    },
+    {
+        "name": "QQ Mail",
+        "pkg": "com.tencent.androidqqmail"
+    },
+    {
+        "name": "WeSync",
+        "pkg": "com.etekcity.vesyncplatform"
+    },
+    {
+        "name": "Mail Master",
+        "pkg": "com.netease.mail"
+    },
+    {
+        "name": "Mi Video call-Xiaomi",
+        "pkg": "com.miui.videoplayer"
+    },
+    {
+        "name": "Pleco",
+        "pkg": "com.pleco.chinesesystem"
+    },
+    {
+        "name": "China Metro",
+        "pkg": "com.xinlukou.metroman"
+    },
+    {
+        "name": "All video downloader",
+        "pkg": "com.snowwhiteapps.downloader"
+    },
+    {
+        "name": "Vigo Lite",
+        "pkg": "com.ss.android.ugc.boomlite"
+    },
+    {
+        "name": "Udictionary",
+        "pkg": "com.youdao.hindict"
+    },
+    {
+        "name": "Livu",
+        "pkg": "com.videochat.livu"
+    },
+    {
+        "name": "Uplive",
+        "pkg": "com.asiainno.uplive"
+    },
+    {
+        "name": "Kings of Avalon",
+        "pkg": "com.funplus.kingofavalon"
+    },
+    {
+        "name": "Guns of glory",
+        "pkg": "com.diandian.gog"
+    },
+    {
+        "name": "Castle Cash",
+        "pkg": "com.igg.castleclash"
+    },
+    {
+        "name": "NonoLive",
+        "pkg": "com.nono.android"
+    },
+    {
+        "name": "Dating.com",
+        "pkg": "com.dating.android"
+    },
+    {
+        "name": "Web Novel",
+        "pkg": "com.qidian.Int.reader"
+    },
+    {
+        "name": "Hello Yo",
+        "pkg": "sg.bigo.hellotalk"
+    },
+    {
+        "name": "Lagecy of discord",
+        "pkg": "com.gtarcade.lod"
+    },
+    {
+        "name": "Last empire",
+        "pkg": "com.longtech.lastwars.gp"
+    },
+    {
+        "name": "Art of conquest",
+        "pkg": "com.lilithgame.sgame.gp.oss"
+    },
+    {
+        "name": "Flash Keyboard",
+        "pkg": "com.flashkeyboardtheme"
+    },
+    {
+        "name": "Turbo VPN",
+        "pkg": "free.vpn.unblock.proxy.turbovpn"
+    },
+    {
+        "name": "viva Video",
+        "pkg": "com.quvideo.xiaoying"
+    },
+    {
+        "name": "Cheez",
+        "pkg": "com.jetstartgames.chess"
+    },
+    {
+        "name": "Alibaba.com",
+        "pkg": "com.alibaba.intl.android.apps.poseidon"
+    },
+    {
+        "name": "TikTok Lite",
+        "pkg": "com.zhiliaoapp.musically.go"
+    },
+    {
+        "name": "AppLock lite",
+        "pkg": "com.domobile.applock.lite"
+    },
+    {
+        "name": "AliExpress",
+        "pkg": "com.alibaba.aliexpresshd"
+    },
+    {
+        "name": "iTao",
+        "pkg": "com.alibaba.aliexpress.itao"
+    },
+    {
+        "name": "ES File Manager",
+        "pkg": "com.tool.fileexplorer.filemanager.filetransfer"
+    },
+    {
+        "name": "File Explorer File Manager",
+        "pkg": "com.file.manager.filebrowser"
+    },
+    {
+        "name": "Music Player",
+        "pkg": "com.musicplayer.musica.musicapps.playermusic"
+    },
+    {
+        "name": "mi pay",
+        "pkg": "com.mipay.in.wallet"
+    },
+    {
+        "name": "mi remote control",
+        "pkg": "com.duokan.phone.remotecontroller"
+    },
+    {
+        "name": "banggood",
+        "pkg": "com.banggood.client"
+    },
+    {
+        "name": "Mi Credit",
+        "pkg": "com.micredit.in.gp"
+    },
+    {
+        "name": "WPS Office",
+        "pkg": "cn.wps.moffice_eng"
+    },
+    {
+        "name": "WPS Office Lite",
+        "pkg": "cn.wps.moffice_i18n"
+    },
+    {
+        "name": "WPS PDF",
+        "pkg": "cn.wps.pdf"
+    },
+    {
+        "name": "WPS Office Extra",
+        "pkg": "cn.wps.moffice_extra"
+    },
+    {
+        "name": "WPS Premium Subscription",
+        "pkg": "cn.wps.moffice_premium"
+    },
+    {
+        "name": "WPS PDF Fill",
+        "pkg": "cn.wps.pdf.fillsign"
+    },
+    {
+        "name": "Zapya - File Transfer, Sharing Music Playlist",
+        "pkg": "om.dewmobile.kuaiya.play"
+    },
+    {
+        "name": "Zapya WebShare - File Sharing in Web Browser",
+        "pkg": "com.dewmobile.kuaiya.web"
+    },
+    {
+        "name": "Zapya Go - From File Transfer to Private Social",
+        "pkg": "com.dewmobile.zapyago"
+    },
+    {
+        "name": "RecorderZ - Screen Recorder by Zapya",
+        "pkg": "com.dewmobile.kuaiya.recorder"
+    },
+    {
+        "name": "Zapya Doodle",
+        "pkg": "com.dewmobile.kuaiya.paintpad.play"
+    },
+    {
+        "name": "Zapya Air Hockey",
+        "pkg": "com.dewmobile.kuaiya.game.airhockey.play"
+    },
+    {
+        "name": "ScreenLockZ by Zapya",
+        "pkg": "com.dewmobile.kuaiya.zproj.screenlockz"
+    },
+    {
+        "name": "Zapya MiniGame",
+        "pkg": "com.dewmobile.game"
+    },
+    {
+        "name": "MyDearest",
+        "pkg": "com.dewmobile.kuaibao.gp"
+    },
+    {
+        "name": "AppLockZ by Zapya",
+        "pkg": "com.dewmobile.kuaiya.zproj.applockz"
+    },
+    {
+        "name": "FileZ - Easy File Manager",
+        "pkg": "com.dewmobile.kuaiya.filez"
+    },
+    {
+        "name": "DingTalk",
+        "pkg": "com.alibaba.android.rimet"
+    },
+    {
+        "name": "DingTalk Lite",
+        "pkg": "com.alibaba.dingtalk.global"
+    }
+]

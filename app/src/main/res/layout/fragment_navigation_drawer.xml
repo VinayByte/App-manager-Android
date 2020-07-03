@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".views.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="@dimen/bottom_sheet_top_padding">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_row_height"
+            android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title">
+
+            <ImageView
+                android:id="@+id/icon_title"
+                android:layout_width="@dimen/bottom_sheet_image_title_dimension"
+                android:layout_height="@dimen/bottom_sheet_image_title_dimension"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:src="@mipmap/ic_launcher_round"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_navigation_drawer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/icon_title"
+                android:textColor="@color/accent"
+                android:textSize="@dimen/bottom_sheet_title_size"
+                android:text="@string/app_name" />
+
+        </RelativeLayout>
+
+        <include layout="@layout/horizontal_separator" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/box_import_selected"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_row_height"
+            android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title"
+            android:drawableLeft="@drawable/ic_archive"
+            android:drawablePadding="8dp"
+            android:gravity="center|start"
+            android:textColor="@color/primary_text"
+            android:text="@string/menu_import_selected_apps"
+            android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
+            android:drawableStart="@drawable/ic_archive" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/box_export_selected"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_row_height"
+            android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:gravity="center|start"
+            android:textColor="@color/primary_text"
+            android:text="@string/menu_export_selected_apps"
+            android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
+            android:drawableStart="@drawable/ic_unarchive" />
+
+        <include layout="@layout/horizontal_separator" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/share_apps"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_row_height"
+            android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title"
+            android:drawableLeft="@drawable/ic_archive"
+            android:drawablePadding="8dp"
+            android:gravity="center|start"
+            android:textColor="@color/primary_text"
+            android:text="@string/menu_share_apps"
+            android:drawableStart="@drawable/ic_share" />
+
+        <include layout="@layout/horizontal_separator" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/box_leave_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_row_height"
+            android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:gravity="center|start"
+            android:textColor="@color/primary_text"
+            android:text="@string/menu_feedback"
+            android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
+            android:drawableStart="@drawable/ic_feedback" />
+
+        <include layout="@layout/horizontal_separator" />
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/box_rate_this_app"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_row_height"
+            android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:gravity="center|start"
+            android:textColor="@color/primary_text"
+            android:text="@string/menu_rate_this_app"
+            android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
+            android:drawableStart="@drawable/ic_rate_review" />
+
+        <include layout="@layout/horizontal_separator" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/box_info_developer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_sheet_row_height"
+            android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title"
+            android:drawableLeft="@drawable/ic_user"
+            android:drawablePadding="8dp"
+            android:gravity="center|start"
+            android:textColor="@color/primary_text"
+            android:text="@string/menu_info_developer"
+            android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
+            android:drawableStart="@drawable/ic_user" />
+        <include layout="@layout/horizontal_separator" />
+
+        <TextView
+            android:id="@+id/application_version"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:gravity="bottom"
+            android:layout_gravity="center"
+            android:textColor="@color/secondary_text"
+            android:textSize="@dimen/footer_text_dimension" />
+    </LinearLayout>
+</layout>
