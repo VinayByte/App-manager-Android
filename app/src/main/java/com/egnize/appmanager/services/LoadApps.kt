@@ -7,13 +7,12 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.egnize.appmanager.AppExecutors
+import com.egnize.appmanager.BuildConfig
 import com.egnize.appmanager.Constants
 import com.egnize.appmanager.models.App
 import com.egnize.chineseapps.utils.Logs
 import com.egnize.chineseapps.utils.Response
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.google.firebase.perf.FirebasePerformance
 import java.util.*
 
@@ -22,7 +21,7 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
     private var installedAppList: MutableList<App> = ArrayList()
     private var packageManager: PackageManager? = null
     val firestoreDataFetched = MutableLiveData<Boolean>()
-    val chineseAppsList :MutableList<Response> = mutableListOf()
+    val chineseAppsList: MutableList<Response> = mutableListOf()
     val firestoreChineseApps = MutableLiveData<MutableList<Response>>()
 
     val installedChineseApps = MutableLiveData<MutableList<App>>()
@@ -65,6 +64,9 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
         val packageName = getApplicationPackageName(applicationInfo)
         val icon = getAppliactionIcon(applicationInfo)
         val installedDate = getInstalledDate(packageName)
+        if (packageName == BuildConfig.APPLICATION_ID){
+            return
+        }
         val app = App(
                 label,
                 sourceDir,
@@ -125,7 +127,7 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
         installedApps.postValue(installedAppList)
     }
 
-    fun getFireStoreData(){
+    fun getFireStoreData() {
         val docRef = db.collection("data").document("app_list")
         docRef.addSnapshotListener { snapshot, e ->
             if (e != null) {
@@ -136,7 +138,7 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
 
             if (snapshot != null && snapshot.exists()) {
                 chineseAppsList.clear()
-                for (item in snapshot.data?.getValue("list") as ArrayList<HashMap<String, String>>){
+                for (item in snapshot.data?.getValue("list") as ArrayList<HashMap<String, String>>) {
                     chineseAppsList.add(Response(item["name"], item["pkg"]))
                 }
                 Logs.d("Firestore: ", "Current data: ${snapshot.data}")
@@ -152,9 +154,9 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
     }
 
     private fun filteredChineseApps() {
-        if (chineseAppsList.isNotEmpty()){
+        if (chineseAppsList.isNotEmpty()) {
             val aColIds = chineseAppsList.map { it.pkg }.toSet()
-            installedChineseAppList = installedAppList.filter {it.packageName in aColIds  }
+            installedChineseAppList = installedAppList.filter { it.packageName in aColIds }
             installedChineseApps.postValue(installedChineseAppList as MutableList<App>)
         }
     }

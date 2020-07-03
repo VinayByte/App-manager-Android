@@ -4,9 +4,9 @@ object Constants {
     const val WRITE_REQUEST_CODE = 43
     const val READ_REQUEST_CODE = 42
 
-    const val MAIL = "nicola@serlonghi.com"
-    const val SUBJECT = "Uninstall System Apps - Feedback"
-    const val MY_WEB_SITE = "https://serlonghi.com"
+    const val MAIL = "feedback@egnize.com"
+    const val SUBJECT = "App Manager - Feedback"
+    const val MY_WEB_SITE = "https://egnize.com"
     const val FLAG_ALPHABETICAL_ORDER = "alphabetical_order"
     const val FLAG_INSTALLATION_DATE = "installation_date"
     const val FLAG_HIDE_SYSTEM_APPS = "hide_system_apps"
@@ -19,5 +19,8 @@ object Constants {
     const val FLAG_USER_APPS = "show_user_apps"
     const val FLAG_ALL_APPS = "show_all_apps"
     const val FLAG_CHINESE_APPS = "show_chinese_apps"
+
+    const val PRF_IS_FIRST_LAUNCH = "prf_is_first_launch"
+
 
 }

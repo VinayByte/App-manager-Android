@@ -16,7 +16,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout.OnRefreshListener
-import com.pixplicity.easyprefs.library.Prefs
 import com.egnize.appmanager.Constants
 import com.egnize.appmanager.R
 import com.egnize.appmanager.adapters.AppRecyclerAdapter
@@ -27,6 +26,7 @@ import com.egnize.appmanager.models.App
 import com.egnize.appmanager.models.RootState
 import com.egnize.appmanager.viewmodels.MainViewModel
 import com.egnize.appmanager.views.BottomSheetFragment.IsSelectedBottomSheetFragment
+import com.pixplicity.easyprefs.library.Prefs
 import java.util.*
 
 class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, IsSelectedBottomSheetFragment {
@@ -35,7 +35,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
     private lateinit var binding: ActivityMainBinding
     private var recyclerView: RecyclerView? = null
     private var appRecyclerAdapter: AppRecyclerAdapter? = null
-    private  var installedApps: MutableList<App> = ArrayList()
+    private var installedApps: MutableList<App> = ArrayList()
     var adapterCallback = MutableLiveData<Boolean>()
 
 
@@ -48,7 +48,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
     }
 
     override val viewModel: MainViewModel
-         get() {
+        get() {
             if (mainViewModel == null) {
                 val application = application
                 val dataRepository = (application as com.egnize.appmanager.App).dataRepository
@@ -106,7 +106,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
                     resources.getString(R.string.progress_dialog_removing_apps)
             )
             val uninstallResult = viewModel.removeApps(installedApps!!)
-            uninstallResult.observeForever( Observer {
+            uninstallResult.observeForever(Observer {
                 if (it == null) {
                     stopUninstallProcess(it!!, uninstallAnimation)
                 }
@@ -127,7 +127,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
 
     fun removeUserApps(installedApps: List<App>?) {
         val selectedApps: List<App> = mainViewModel!!.getSelectedApps(installedApps)
-        if (selectedApps.isEmpty()){
+        if (selectedApps.isEmpty()) {
             onRefresh()
             return
         }
@@ -230,17 +230,17 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
         setOnRefreshListener()
         startLoadingAnimation()
 
-//        viewModel.installedApps.observe(this, Observer {
-//            if (!it.isNullOrEmpty()) {
-//                installedApps = it
-//                hideAppStoredFlag()
-//                orderAppInStoredOrder()
-//                updateRecyclerView()
-//                stopLoadingAnimation()
-//                binding.swipeRefresh.isRefreshing = false
-//            }
-//        })
-//        checkRootState()
+        viewModel.installedApps.observe(this, Observer {
+            if (!it.isNullOrEmpty()) {
+                installedApps = it
+                hideAppStoredFlag()
+                orderAppInStoredOrder()
+                updateRecyclerView()
+                stopLoadingAnimation()
+                binding.swipeRefresh.isRefreshing = false
+            }
+        })
+        checkRootState()
     }
 
     private fun setOnclickListener() {
@@ -255,17 +255,17 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
 
     override fun onResume() {
         super.onResume()
-        viewModel.installedApps.observe(this, Observer {
-            if (!it.isNullOrEmpty()) {
-                installedApps = it
-                hideAppStoredFlag()
-                orderAppInStoredOrder()
-                updateRecyclerView()
-                stopLoadingAnimation()
-                binding.swipeRefresh.isRefreshing = false
-            }
-        })
-        checkRootState()
+//        viewModel.installedApps.observe(this, Observer {
+//            if (!it.isNullOrEmpty()) {
+//                installedApps = it
+//                hideAppStoredFlag()
+//                orderAppInStoredOrder()
+//                updateRecyclerView()
+//                stopLoadingAnimation()
+//                binding.swipeRefresh.isRefreshing = false
+//            }
+//        })
+//        checkRootState()
     }
 
     private fun hideAppStoredFlag() {
@@ -287,7 +287,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
             installedApps = viewModel.hideUserApps(installedApps)
         } else if (!isShowSystemApps && isShowUserApps && !isShowAllApps && !isShowChineseApps) {
             installedApps = viewModel.hideSystemApps(installedApps)
-        }else if (!isShowSystemApps && !isShowUserApps && !isShowAllApps && isShowChineseApps) {
+        } else if (!isShowSystemApps && !isShowUserApps && !isShowAllApps && isShowChineseApps) {
             installedApps = viewModel.showChineseApps(installedApps)
         }
     }
@@ -367,7 +367,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
             RootState.HAVE_ROOT -> {
                 var rootAccessAlreadyObtained = isRootAccessAlreadyObtained
                 if (rootAccessAlreadyObtained)
-                rootAccessAlreadyObtained = true
+                    rootAccessAlreadyObtained = true
                 generateRootStateAlertDialog(
                         resources.getString(R.string.alert_dialog_title_have_root),
                         resources.getString(R.string.alert_dialog_message_have_root)
@@ -443,6 +443,7 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
         installedApps = viewModel.hideSystemApps(installedApps)
         updateRecyclerView()
     }
+
     override fun onSelectedShowChineseApps() {
         onRefresh()
         installedApps = viewModel.uncheckedAllApps(installedApps)
@@ -468,47 +469,47 @@ class MainActivity : BaseActivity(), View.OnClickListener, OnRefreshListener, Is
 //                resources.getString(R.string.progress_dialog_removing_apps)
 //            )
 
-    val mApps = installedApps as ArrayList<App>
-     val mFreeApps: ArrayList<App> = viewModel.getSelectedApps(installedApps) as ArrayList<App>
-    if (requestCode == UNINSTALL_REQUEST_CODE) {
-        if (resultCode == RESULT_OK) {
-            val packageName = mFreeApps[0].packageName
-            for (i in mApps.indices) {
-                if (mApps[i].packageName.compareTo(packageName) == 0) {
-                    mApps.removeAt(i)
-                    appRecyclerAdapter!!.notifyDataSetChanged()
-                    break
+        val mApps = installedApps as ArrayList<App>
+        val mFreeApps: ArrayList<App> = viewModel.getSelectedApps(installedApps) as ArrayList<App>
+        if (requestCode == UNINSTALL_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                val packageName = mFreeApps[0].packageName
+                for (i in mApps.indices) {
+                    if (mApps[i].packageName.compareTo(packageName) == 0) {
+                        mApps.removeAt(i)
+                        appRecyclerAdapter!!.notifyDataSetChanged()
+                        break
+                    }
+                }
+            } else {
+                val packageName = mFreeApps[0].packageName
+                for (i in mApps.indices) {
+                    if (mApps[i].packageName.compareTo(packageName) == 0) {
+                        mApps[i].isSelected = false
+                        appRecyclerAdapter!!.notifyDataSetChanged()
+                        break
+                    }
                 }
             }
-        } else {
-            val packageName = mFreeApps[0].packageName
-            for (i in mApps.indices) {
-                if (mApps[i].packageName.compareTo(packageName) == 0) {
-                    mApps[i].isSelected = false
-                    appRecyclerAdapter!!.notifyDataSetChanged()
-                    break
-                }
-            }
-        }
 
-        mFreeApps.removeAt(0)
-        if (mFreeApps.size != 0) {
-            /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                 val packageInstaller = this.packageManager.packageInstaller
-                 val uninstallIntent = Intent(this, this.javaClass)
-                 val sender = PendingIntent.getActivity(this, 0, uninstallIntent, 0)
-                 packageInstaller.uninstall(mFreeApps[0].packageName, sender.intentSender);
-             } else {*/
-            val packageUri = Uri.parse("package:" + mFreeApps[0].packageName)
-            val uninstallIntent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri)
-            uninstallIntent.putExtra(Intent.EXTRA_RETURN_RESULT, true)
-            startActivityForResult(uninstallIntent, 1)
-            // }
-        } else {
-            mFreeApps.clear()
-            onRefresh()
+            mFreeApps.removeAt(0)
+            if (mFreeApps.size != 0) {
+                /* if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                     val packageInstaller = this.packageManager.packageInstaller
+                     val uninstallIntent = Intent(this, this.javaClass)
+                     val sender = PendingIntent.getActivity(this, 0, uninstallIntent, 0)
+                     packageInstaller.uninstall(mFreeApps[0].packageName, sender.intentSender);
+                 } else {*/
+                val packageUri = Uri.parse("package:" + mFreeApps[0].packageName)
+                val uninstallIntent = Intent(Intent.ACTION_UNINSTALL_PACKAGE, packageUri)
+                uninstallIntent.putExtra(Intent.EXTRA_RETURN_RESULT, true)
+                startActivityForResult(uninstallIntent, 1)
+                // }
+            } else {
+                mFreeApps.clear()
+                onRefresh()
+            }
         }
-    }
     }
 
 }

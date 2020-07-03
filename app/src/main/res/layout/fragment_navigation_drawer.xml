@@ -65,7 +65,7 @@
 
         <include layout="@layout/horizontal_separator" />
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/share_apps"
+            android:id="@+id/box_share_selected"
             android:layout_width="match_parent"
             android:layout_height="@dimen/bottom_sheet_row_height"
             android:layout_marginLeft="@dimen/bottom_sheet_margin_left_title"
@@ -103,7 +103,7 @@
             android:textColor="@color/primary_text"
             android:text="@string/menu_rate_this_app"
             android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
-            android:drawableStart="@drawable/ic_rate_review" />
+            android:drawableStart="@drawable/ic_rateus" />
 
         <include layout="@layout/horizontal_separator" />
 

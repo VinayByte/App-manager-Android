@@ -12,13 +12,13 @@ import android.widget.ImageView
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.pixplicity.easyprefs.library.Prefs
 import com.egnize.appmanager.Constants
 import com.egnize.appmanager.R
 import com.egnize.appmanager.databinding.FragmentBottomSheetBinding
 import com.egnize.appmanager.helpers.CustomAlertDialog
 import com.egnize.chineseapps.utils.Logs
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.pixplicity.easyprefs.library.Prefs
 
 class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
     private lateinit var binding: FragmentBottomSheetBinding
@@ -27,7 +27,8 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
     interface IsSelectedBottomSheetFragment {
         fun onSelectedAlphabeticalOrder()
         fun onSelectInstallationDateOrder()
-//        fun onSelectedHideSystemApps()
+
+        //        fun onSelectedHideSystemApps()
 //        fun onSelectedHideUserApps()
         fun onSelectedShowAllApps()
         fun onSelectedShowSystemApps()
@@ -118,6 +119,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
     private fun setStateStoredOfShowUserApps(status: Boolean) {
         if (status) binding.checkedUserApps.visibility = View.VISIBLE else binding.checkedUserApps.visibility = View.GONE
     }
+
     private fun setStateStoredOfShowChineseApps(status: Boolean) {
         if (status) binding.checkedChineseApps.visibility = View.VISIBLE else binding.checkedChineseApps.visibility = View.GONE
     }
@@ -273,6 +275,7 @@ class BottomSheetFragment : BottomSheetDialogFragment(), View.OnClickListener {
         Prefs.putBoolean(Constants.FLAG_USER_APPS, false)
         isSelectedBottomSheetFragment!!.onSelectedShowChineseApps()
     }
+
     private fun manageClickChooseAppTheme() {
         val title = resources.getString(R.string.alert_dialog_app_theme_title)
         val appThemeOptions = resources.getStringArray(R.array.alert_dialog_app_theme_options)

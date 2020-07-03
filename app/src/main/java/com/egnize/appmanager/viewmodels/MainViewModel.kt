@@ -80,12 +80,13 @@ class MainViewModel(application: Application, private val rootManager: RootManag
         }
         return installedApps
     }
+
     fun showChineseApps(installedApps: List<App>): MutableList<App> {
         val chineseAppsList = firestoreChineseApps.value!!
         var installedChineseAppList = mutableListOf<App>()
-        if (chineseAppsList.isNotEmpty()){
+        if (chineseAppsList.isNotEmpty()) {
             val aColIds = chineseAppsList.map { it.pkg }.toSet()
-             installedChineseAppList = installedApps.filter {it.packageName in aColIds  } as MutableList<App>
+            installedChineseAppList = installedApps.filter { it.packageName in aColIds } as MutableList<App>
         }
         return installedChineseAppList
     }
@@ -128,9 +129,11 @@ class MainViewModel(application: Application, private val rootManager: RootManag
         rootManager!!.removeApps(selectedApps)
         return rootManager.getUninstallResult()
     }
+
     fun getUninstallResult(): SingleLiveEvent<Boolean> {
         return uninstallUserAppsResult
     }
+
     fun checkRootPermission(): RootState? {
         val hasRootedPermission = rootManager!!.hasRootedPermision()
         if (hasRootedPermission) return RootState.HAVE_ROOT

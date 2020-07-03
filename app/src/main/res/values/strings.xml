@@ -17,7 +17,7 @@
     <string name="menu_export_selected_apps">Export selected apps</string>
     <string name="menu_feedback">Send feedback</string>
     <string name="menu_info_developer">Created by egnize</string>
-    <string name="menu_application_version">Application version \u2022 %1$s</string>
+    <string name="menu_application_version">version \u2022 %1$s</string>
     <string name="menu_rate_this_app">Rate this app</string>
     <string name="menu_share_apps">Share this App</string>
 
@@ -32,15 +32,15 @@
     <string name="alert_dialog_ask_permission_to_remove_apps_title">Do you want to REMOVE selected apps?</string>
     <string name="alert_dialog_ask_permission_to_remove_apps_message">You are going to remove selected apps. It\'s an irreversible action, pay attention.</string>
     <string name="alert_dialog_title_no_root_permission">Sorry! Root access is not installed on this device!</string>
-    <string name="alert_dialog_message_no_root_permission">Root access is required in order to uninstall
-        apps from the device. Until you don\'t get it you can only visualize all apps (included system apps) installed on your device.</string>
-    <string name="alert_dialog_title_be_root">Ops...you don\'t guaranteed root access for this app!</string>
+    <string name="alert_dialog_message_no_root_permission">Root access is required in order to uninstall system
+        apps from the device. Until you don\'t get it you can only visualize the system apps installed on your device.</string>
+    <string name="alert_dialog_title_be_root">oops...you don\'t guaranteed root access for this app!</string>
     <string name="alert_dialog_message_be_root">Root access is installed on your device, but
         to uninstall the apps, you have to grant root access for this app from your root manager app.</string>
     <string name="alert_dialog_title_have_root">Root access obtained!</string>
     <string name="alert_dialog_message_have_root">Root access is properly installed on this device.</string>
-    <string name="alert_dialog_title_error_remove_apps">Ops...something gone wrong!</string>
-    <string name="alert_dialog_title_error_alert_apps">Ops...!</string>
+    <string name="alert_dialog_title_error_remove_apps">oops...something gone wrong!</string>
+    <string name="alert_dialog_title_error_alert_apps">oops...!</string>
     <string name="alert_dialog_message_error_remove_apps">There was a problem, some apps may not have been removed.</string>
     <string name="alert_dialog_title_reboot_now">Would you like to reboot now?</string>
     <string name="alert_dialog_message_reboot_now">Reboot required to remove all apps.</string>
@@ -62,6 +62,13 @@
     <string name="menu_chinese_apps">Chinese Apps</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="ez_uninstaller">EZ-Uninstaller</string>
+    <string name="about_app_name">App Manager</string>
+    <string name="action_share_app">Share via</string>
+    <string name="privacy_terms">By proceeding, you confirm you accept App manager <annotation type="http://www.egnize.com/apps-privacy-policy/">Agreement &amp; Privacy Policy.</annotation></string>
+    <string name="get_started">Get Started</string>
+    <string name="network_error">Can not connect to the internet. Please check your connection &amp; try again.</string>
+    <string name="retry">Retry</string>
+
 
 
 </resources>

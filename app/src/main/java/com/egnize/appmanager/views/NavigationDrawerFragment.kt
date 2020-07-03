@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import com.egnize.appmanager.BuildConfig
 import com.egnize.appmanager.Constants
 import com.egnize.appmanager.Constants.READ_REQUEST_CODE
 import com.egnize.appmanager.Constants.WRITE_REQUEST_CODE
@@ -21,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListener {
     private lateinit var binding: FragmentNavigationDrawerBinding
@@ -36,7 +38,7 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding!!.applicationVersion.text = String.format(getString(R.string.menu_application_version), getString(R.string.app_version_code))
+        binding.applicationVersion.text = String.format(getString(R.string.menu_application_version), getString(R.string.app_version_code))
         setOnclickListener()
     }
 
@@ -47,28 +49,21 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
     }
 
     private fun setOnclickListener() {
-        binding!!.boxInfoDeveloper.setOnClickListener(this)
-        binding!!.boxLeaveFeedback.setOnClickListener(this)
-        binding!!.boxImportSelected.setOnClickListener(this)
-        binding!!.boxExportSelected.setOnClickListener(this)
+        binding.boxImportSelected.setOnClickListener(this)
+        binding.boxExportSelected.setOnClickListener(this)
+        binding.boxShareSelected.setOnClickListener(this)
+        binding.boxLeaveFeedback.setOnClickListener(this)
+        binding.boxRateThisApp.setOnClickListener(this)
+        binding.boxInfoDeveloper.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.box_info_developer -> {
-                val url = Constants.MY_WEB_SITE
-                openWebSite(url)
-            }
-            R.id.box_leave_feedback -> {
-                val mail = Constants.MAIL
-                val subject = Constants.SUBJECT
-                openMailFeedback(mail, subject)
-            }
             R.id.box_import_selected -> performFileSearch()
             R.id.box_export_selected -> if (atLeasOneAppSelected()) {
-                val formatter = SimpleDateFormat("dd_MM_yyyy_HH_mm_ss", Locale.ITALY)
+                val formatter = SimpleDateFormat("ddMMyyyy_HHmmss")
                 val now = Date()
-                createFile("text/uninsSystemApp", formatter.format(now) + ".uninsSystemApp")
+                createFile("text/egnizeapp", formatter.format(now) + ".egnizeapp")
             } else {
                 CustomAlertDialog.showAlertDialogWithOneButton(
                         context!!,
@@ -77,7 +72,37 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
                         resources.getString(R.string.button_ok),
                         null)
             }
+            R.id.box_share_selected -> {
+                openShareApp()
+            }
+            R.id.box_leave_feedback -> {
+                val mail = Constants.MAIL
+                val subject = Constants.SUBJECT
+                openMailFeedback(mail, subject)
+            }
+            R.id.box_rate_this_app -> {
+                rateThisApp()
+            }
+            R.id.box_info_developer -> {
+                val url = Constants.MY_WEB_SITE
+                openWebSite(url)
+            }
         }
+    }
+
+    private fun rateThisApp() {
+        val uri = Uri.parse("https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
+        val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+        startActivity(goToMarket)
+    }
+
+    private fun openShareApp() {
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.about_app_name))
+        val extraText = "https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}"
+        intent.putExtra(Intent.EXTRA_TEXT, extraText)
+        startActivity(Intent.createChooser(intent, getString(R.string.action_share_app)))
     }
 
     private fun openWebSite(url: String) {

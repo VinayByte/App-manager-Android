@@ -7,17 +7,17 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.MutableLiveData;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.egnize.appmanager.R;
 import com.egnize.appmanager.databinding.RecyclerRowItemBinding;
 import com.egnize.appmanager.models.App;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.MutableLiveData;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class AppRecyclerAdapter extends RecyclerView.Adapter<AppRecyclerAdapter.ViewHolder> {
     private final boolean rootAccessAlreadyObtained;
@@ -68,13 +68,13 @@ public class AppRecyclerAdapter extends RecyclerView.Adapter<AppRecyclerAdapter.
         holder.title.setText(app.getName());
         holder.appPackage.setText(app.getPackageName());
         holder.selected.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (rootAccessAlreadyObtained){
+            if (rootAccessAlreadyObtained) {
                 app.setSelected(isChecked);
-            }else {
-                if (!app.isSystemApp()){
+            } else {
+                if (!app.isSystemApp()) {
                     app.setSelected(isChecked);
                     adapterCallback.postValue(false);
-                }else {
+                } else {
                     app.setSelected(false);
                     holder.selected.setChecked(false);
                     adapterCallback.postValue(true);
@@ -83,14 +83,14 @@ public class AppRecyclerAdapter extends RecyclerView.Adapter<AppRecyclerAdapter.
 
         });
         boolean appIsSelected = app.isSelected();
-        if (rootAccessAlreadyObtained){
+        if (rootAccessAlreadyObtained) {
             holder.selected.setChecked(appIsSelected);
             adapterCallback.postValue(false);
-        }else {
-            if (!app.isSystemApp()){
+        } else {
+            if (!app.isSystemApp()) {
                 holder.selected.setChecked(appIsSelected);
                 adapterCallback.postValue(false);
-            }else {
+            } else {
                 holder.selected.setChecked(false);
                 adapterCallback.postValue(false);
             }
@@ -114,7 +114,7 @@ public class AppRecyclerAdapter extends RecyclerView.Adapter<AppRecyclerAdapter.
         List<App> visibleApps = new ArrayList<>();
         for (App app : installedApps) {
             boolean isVisble = app.isVisible();
-            if(isVisble)
+            if (isVisble)
                 visibleApps.add(app);
         }
         installedApps = (ArrayList<App>) visibleApps;
