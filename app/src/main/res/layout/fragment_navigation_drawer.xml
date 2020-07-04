@@ -49,6 +49,7 @@
             android:textColor="@color/primary_text"
             android:text="@string/menu_import_selected_apps"
             android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
+            android:visibility="gone"
             android:drawableStart="@drawable/ic_archive" />
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/box_export_selected"
@@ -61,9 +62,10 @@
             android:textColor="@color/primary_text"
             android:text="@string/menu_export_selected_apps"
             android:layout_marginStart="@dimen/bottom_sheet_margin_left_title"
+            android:visibility="gone"
             android:drawableStart="@drawable/ic_unarchive" />
 
-        <include layout="@layout/horizontal_separator" />
+<!--        <include layout="@layout/horizontal_separator" />-->
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/box_share_selected"
             android:layout_width="match_parent"

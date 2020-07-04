@@ -66,7 +66,7 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
                 createFile("text/egnizeapp", formatter.format(now) + ".egnizeapp")
             } else {
                 CustomAlertDialog.showAlertDialogWithOneButton(
-                        context!!,
+                        requireContext(),
                         resources.getString(R.string.alert_dialog_no_app_selected_title),
                         resources.getString(R.string.alert_dialog_no_app_selected_message),
                         resources.getString(R.string.button_ok),
@@ -173,7 +173,7 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
             }
         }
         try {
-            val pfd = context!!.contentResolver.openFileDescriptor(uri!!, "w")
+            val pfd = requireContext().contentResolver.openFileDescriptor(uri!!, "w")
             val fileOutputStream = FileOutputStream(pfd!!.fileDescriptor)
             fileOutputStream.write(selectedApp.toByteArray())
             fileOutputStream.close()
@@ -184,7 +184,7 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
             e.printStackTrace()
         }
         CustomAlertDialog.showAlertDialogWithOneButton(
-                context!!,
+                requireContext(),
                 resources.getString(R.string.alert_dialog_title_exported_correctly),
                 resources.getString(R.string.alert_dialog_message_exported_correctly),
                 resources.getString(R.string.button_ok),
@@ -195,7 +195,7 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
     // I read the selected apps in the file that is passed to me and update the recyclerView
     @Throws(IOException::class)
     private fun readFileContent(uri: Uri?, apps: ArrayList<App>?) {
-        val inputStream = context!!.contentResolver.openInputStream(uri!!)
+        val inputStream = requireContext().contentResolver.openInputStream(uri!!)
         val reader = BufferedReader(InputStreamReader(inputStream))
         val stringBuilder = StringBuilder()
         var currentline: String?
@@ -214,7 +214,7 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
         (activity as MainActivity?)!!.setInstalledApps(apps)
         if (count == 0) {
             CustomAlertDialog.showAlertDialogWithOneButton(
-                    context!!,
+                    requireContext(),
                     resources.getString(R.string.alert_dialog_title_no_app_selected_present),
                     resources.getString(R.string.alert_dialog_message_no_app_selected_present),
                     resources.getString(R.string.button_ok),
@@ -222,7 +222,7 @@ class NavigationDrawerFragment : BottomSheetDialogFragment(), View.OnClickListen
             )
         } else {
             CustomAlertDialog.showAlertDialogWithOneButton(
-                    context!!,
+                    requireContext(),
                     resources.getString(R.string.alert_dialog_title_imported_correctly),
                     count.toString() + " " + resources.getString(R.string.alert_dialog_message_imported_correctly),
                     resources.getString(R.string.button_ok),

@@ -35,7 +35,7 @@ class MainViewModel(application: Application, private val rootManager: RootManag
             val loadApps = loadApps
             return loadApps!!.installedApps
         }
-    val firestoreDataFetched: LiveData<Boolean>
+    val firestoreDataFetched: SingleLiveEvent<Boolean>
         get() {
             val loadApps = loadApps
             return loadApps.firestoreDataFetched

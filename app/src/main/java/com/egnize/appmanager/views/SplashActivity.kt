@@ -78,7 +78,7 @@ class SplashActivity : BaseActivity() {
     private fun launch() {
         getLoadApps()!!.searchInstalledApps()
         viewModel.firestoreDataFetched.observe(this, Observer {
-            if (it) {
+            if (it!!) {
                 SharedPrefUtils.saveData(this, PRF_IS_FIRST_LAUNCH, false)
                 binding.progressBar.visibility = View.GONE
                 startActivity(Intent(this, MainActivity::class.java))

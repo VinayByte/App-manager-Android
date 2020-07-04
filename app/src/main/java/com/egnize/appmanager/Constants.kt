@@ -5,7 +5,7 @@ object Constants {
     const val READ_REQUEST_CODE = 42
 
     const val MAIL = "feedback@egnize.com"
-    const val SUBJECT = "App Manager - Feedback"
+    const val SUBJECT = "Feedback- App Manager"
     const val MY_WEB_SITE = "https://egnize.com"
     const val FLAG_ALPHABETICAL_ORDER = "alphabetical_order"
     const val FLAG_INSTALLATION_DATE = "installation_date"

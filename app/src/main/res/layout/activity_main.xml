@@ -45,7 +45,8 @@
                     android:text="@string/title_main_activity"
                     android:textColor="@color/primary_text"
                     android:textSize="@dimen/toolbar_title_size"
-                    app:fontFamily="@font/open_sans_semibold" />
+                    app:fontFamily="@font/open_sans_semibold"
+                    android:paddingStart="@dimen/toolbar_title_padding_left" />
             </LinearLayout>
         </com.google.android.material.appbar.AppBarLayout>
 

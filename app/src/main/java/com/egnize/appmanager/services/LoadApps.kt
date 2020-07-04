@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData
 import com.egnize.appmanager.AppExecutors
 import com.egnize.appmanager.BuildConfig
 import com.egnize.appmanager.Constants
+import com.egnize.appmanager.helpers.SingleLiveEvent
 import com.egnize.appmanager.models.App
 import com.egnize.chineseapps.utils.Logs
 import com.egnize.chineseapps.utils.Response
@@ -20,7 +21,7 @@ class LoadApps(private val context: Context, private val appExecutors: AppExecut
     val installedApps = MutableLiveData<MutableList<App>>()
     private var installedAppList: MutableList<App> = ArrayList()
     private var packageManager: PackageManager? = null
-    val firestoreDataFetched = MutableLiveData<Boolean>()
+    val firestoreDataFetched = SingleLiveEvent<Boolean>()
     val chineseAppsList: MutableList<Response> = mutableListOf()
     val firestoreChineseApps = MutableLiveData<MutableList<Response>>()
 
